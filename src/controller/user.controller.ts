@@ -1,13 +1,18 @@
-import { Controller, Get, Req } from '@nestjs/common';
-import { Request } from 'express';
+import { Controller, Get, HttpStatus } from '@nestjs/common';
 import { UserService } from '../service/user.service';
 @Controller('user')
 export class UserController {
-  constructor(private useService: UserService) {}
+  constructor(private useService: UserService) {
+    // this.useService = new UserService();
+  }
 
   @Get()
-  getUsers(@Req() request: Request): string {
-    console.info(request);
-    return 'here are users all';
+  async getUsers(): Promise<string> {
+    const users = await this.useService.getUsers();
+    if (!users) {
+      // response.status(HttpStatus.NOT_FOUND).send();
+      return '' + HttpStatus.NOT_FOUND;
+    }
+    return users;
   }
 }
