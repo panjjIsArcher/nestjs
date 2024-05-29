@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AppService } from './app.service';
+import { AppService } from './service/app.service';
 import controller from './controller';
 
 @Module({
