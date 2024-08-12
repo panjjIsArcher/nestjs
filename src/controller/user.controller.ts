@@ -1,13 +1,13 @@
-import { Controller, Get, HttpStatus, Req } from '@nestjs/common';
+import { Controller, Get, Req } from '@nestjs/common';
 import { UserService } from '../service/user.service';
-import { User } from 'src/interfaces/user.interface';
 import { ResponseDto } from 'src/dto/response.dto';
+import { UserEntity } from 'src/entity/user.entity';
 @Controller('user')
 export class UserController {
   constructor(private useService: UserService) {}
 
   @Get()
-  async getUsers(@Req() request: Request): Promise<ResponseDto<User[]>> {
+  async getUsers(@Req() request: Request): Promise<ResponseDto<UserEntity[]>> {
     const users = await this.useService.getUsers();
     if (!users) {
       return new ResponseDto(0, [], 'success');
