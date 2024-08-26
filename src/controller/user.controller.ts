@@ -1,15 +1,18 @@
-import { Controller, Get, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Req } from '@nestjs/common';
 import { UserService } from '../service/user.service';
+import { User } from 'src/entity/user.entity';
 @Controller('user')
 export class UserController {
   constructor(private useService: UserService) {}
 
   @Get()
-  async getUsers(): Promise<string> {
+  async getUsers(): Promise<User[]> {
     const users = await this.useService.getUsers();
-    if (!users) {
-      return '' + HttpStatus.NOT_FOUND;
-    }
     return users;
+  }
+
+  async saveUser(User): Promise<boolean> {
+    const data = await this.useService.saveUser(User);
+    return data;
   }
 }
