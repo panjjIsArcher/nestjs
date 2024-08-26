@@ -16,4 +16,8 @@ export class UserService {
   async saveUser(User) {
     return this.userRepository.save(User);
   }
+
+  async findOne(id: number) {
+    return this.userRepository.findOne({ where: { id } });
+  }
 }
