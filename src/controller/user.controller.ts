@@ -10,4 +10,9 @@ export class UserController {
     const users = await this.useService.getUsers();
     return users;
   }
+
+  async saveUser(User): Promise<boolean> {
+    const data = await this.useService.saveUser(User);
+    return data;
+  }
 }
