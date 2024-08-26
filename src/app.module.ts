@@ -4,10 +4,13 @@ import service from './service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './module/user.module';
 import { User } from './entity/user.entity';
+import { ConfigModule } from '@nestjs/config';
+import setting from '../ormconfig';
 @Module({
   providers: Object.values(service),
   imports: [
-    TypeOrmModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true }),
+    TypeOrmModule.forRoot(setting),
     UserModule,
     TypeOrmModule.forFeature([User]),
   ],

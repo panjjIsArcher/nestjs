@@ -5,8 +5,8 @@ const config: TypeOrmModuleOptions = {
   port: 3306,
   username: 'root',
   password: 'pjj19930911',
+  database: 'nestjs',
   entities: [__dirname + '/**/*.entity{.ts,.js}'],
   synchronize: true,
-  database: 'nestjs',
 };
 export default config;
