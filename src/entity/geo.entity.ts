@@ -7,4 +7,7 @@ export class Geo {
 
   @Column()
   name: string;
+
+  @Column()
+  typeId: number;
 }

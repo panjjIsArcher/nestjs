@@ -11,6 +11,6 @@ export class GeoService {
   ) {}
 
   async findGeoTypes() {
-    this.geoRepository.find();
+    return this.geoRepository.find();
   }
 }
