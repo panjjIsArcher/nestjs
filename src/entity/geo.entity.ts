@@ -17,10 +17,10 @@ export class Geo {
   @Column()
   typeId: number;
 
-  @Column({ type: 'json' })
+  @Column({ type: 'json', nullable: true })
   position: any;
 
-  @Column({ type: 'json' })
+  @Column({ type: 'json', nullable: true })
   rotation: any;
 
   @CreateDateColumn()

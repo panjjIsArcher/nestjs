@@ -13,4 +13,12 @@ export class GeoService {
   async findGeoTypes(): Promise<Geo[]> {
     return this.geoRepository.find();
   }
+
+  async updateGeo(geo) {
+    await this.geoRepository.update(geo.id, geo);
+  }
+
+  async saveGeo(geo) {
+    await this.geoRepository.save(geo);
+  }
 }
