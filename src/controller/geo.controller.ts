@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 import { Geo } from 'src/entity/geo.entity';
 import { GeoService } from 'src/service/geo.service';
 import { apiResponse } from 'src/service/response.service';
@@ -7,10 +7,22 @@ import { Response as ApiResponse } from 'src/interfaces/response.interface';
 export class GeoController {
   constructor(private GeoService: GeoService) {}
 
+  @Get('homeGeo')
+  async getHomeGeo() {
+    // 获取主页面的4个geo
+    const homeGeo = await this.GeoService.getHomeGeo();
+    return apiResponse(homeGeo, 'success!', 200);
+  }
+
   @Get('')
-  async findGeoTypes(): Promise<ApiResponse<Geo[]>> {
-    await this.saveGeo({ name: 'box-top-right', typeId: 2 });
-    const geo = await this.GeoService.findGeoTypes();
+  async findGeo(): Promise<ApiResponse<Geo[]>> {
+    const geo = await this.GeoService.findGeo();
+    return apiResponse(geo, 'success', 200);
+  }
+
+  @Get(':id')
+  async findOne(@Param() param): Promise<ApiResponse<Geo>> {
+    const geo = await this.GeoService.findOne(param.id);
     return apiResponse(geo, 'success', 200);
   }
 
@@ -24,7 +36,4 @@ export class GeoController {
   async saveGeo(geo) {
     await this.GeoService.saveGeo(geo);
   }
-
-  @Get('/homeGeo')
-  async getHomeGeo() {}
 }
