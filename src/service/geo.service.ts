@@ -10,7 +10,7 @@ export class GeoService {
     private geoRepository: GeoRepository,
   ) {}
 
-  async findGeoTypes() {
+  async findGeoTypes(): Promise<Geo[]> {
     return this.geoRepository.find();
   }
 }
