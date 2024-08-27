@@ -35,7 +35,6 @@ export class GeoService {
 
   async getHomeGeo() {
     const geoList = await this.findByIds([1, 2, 3, 4]);
-    console.log(1223, geoList);
     return geoList;
   }
 }

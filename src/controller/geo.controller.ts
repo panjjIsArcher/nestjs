@@ -8,12 +8,11 @@ export class GeoController {
   constructor(private GeoService: GeoService) {}
 
   @Get('homeGeo')
-  async getHomeGeo() {
+  async getHomeGeo(): Promise<ApiResponse<Geo[]>> {
     // 获取主页面的4个geo
     const homeGeo = await this.GeoService.getHomeGeo();
-    return apiResponse(homeGeo, 'success!', 200);
+    return apiResponse(homeGeo, 'success', 200);
   }
-
   @Get('')
   async findGeo(): Promise<ApiResponse<Geo[]>> {
     const geo = await this.GeoService.findGeo();
