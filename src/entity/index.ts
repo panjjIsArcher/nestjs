@@ -1,3 +1,4 @@
 import { User as UserEntity } from './user.entity';
-
-export default { UserEntity };
+import { Geo as GeoEntity } from './geo.entity';
+import { GeoType as GeoTypeEntity } from './geoType.entity';
+export default { UserEntity, GeoEntity, GeoTypeEntity };

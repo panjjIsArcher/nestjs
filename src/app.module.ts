@@ -3,16 +3,20 @@ import controller from './controller';
 import service from './service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './module/user.module';
-import { User } from './entity/user.entity';
+import entity from './entity/index';
 import { ConfigModule } from '@nestjs/config';
 import setting from '../ormconfig';
+import { GeoModule } from './module/geo.module';
+import { GeoTypeModule } from './module/geoType.module';
 @Module({
   providers: Object.values(service),
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(setting),
     UserModule,
-    TypeOrmModule.forFeature([User]),
+    GeoModule,
+    GeoTypeModule,
+    TypeOrmModule.forFeature(Object.values(entity)),
   ],
   controllers: Object.values(controller),
 })
