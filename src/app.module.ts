@@ -7,7 +7,7 @@ import entity from './entity/index';
 import { ConfigModule } from '@nestjs/config';
 import setting from '../ormconfig';
 import { GeoModule } from './module/geo.module';
-import { GeoTypeModule } from './module/geoType.module';
+
 @Module({
   providers: Object.values(service),
   imports: [
@@ -15,7 +15,6 @@ import { GeoTypeModule } from './module/geoType.module';
     TypeOrmModule.forRoot(setting),
     UserModule,
     GeoModule,
-    GeoTypeModule,
     TypeOrmModule.forFeature(Object.values(entity)),
   ],
   controllers: Object.values(controller),
