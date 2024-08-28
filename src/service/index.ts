@@ -1,6 +1,7 @@
 import { AppService } from './app.service';
 import { GeoService } from './geo.service';
 import { TaskService } from './task.service';
+import { TaskTypeService } from './taskType.service';
 import { UserService } from './user.service';
 
 export default {
@@ -8,4 +9,5 @@ export default {
   UserService,
   GeoService,
   TaskService,
+  TaskTypeService,
 };
