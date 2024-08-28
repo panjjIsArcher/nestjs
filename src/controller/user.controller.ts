@@ -3,14 +3,19 @@ import { UserService } from '../service/user.service';
 import { User } from 'src/entity/user.entity';
 import { apiResponse } from 'src/service/response.service';
 import { Response as ApiResponse } from 'src/interfaces/response.interface';
+import { CustomExceptionFilter } from 'src/exceptionFilter';
 @Controller('user')
 export class UserController {
   constructor(private useService: UserService) {}
 
   @Get()
   async getUsers(): Promise<ApiResponse<User[]>> {
-    const users = await this.useService.getUsers();
-    return apiResponse(users, 'success', 200);
+    try {
+      const users = await this.useService.getUsers();
+      return apiResponse(users, 'success', 200);
+    } catch (err) {
+      throw new CustomExceptionFilter();
+    }
   }
 
   @Post('/save')

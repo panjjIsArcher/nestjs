@@ -7,9 +7,10 @@ import { ConfigModule } from '@nestjs/config';
 import setting from '../ormconfig';
 import modules from './module/index';
 import { AuthMiddleware } from './middleware/auth.middleware';
+import { CustomExceptionFilter } from './exceptionFilter';
 
 @Module({
-  providers: Object.values(service),
+  providers: [...Object.values(service)],
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(setting),
