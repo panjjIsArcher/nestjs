@@ -13,10 +13,4 @@ export class TaskController {
     const data = await this.taskService.getHomeTasks();
     return apiResponse(data, 'success', 200);
   }
-
-  @Get()
-  async findTask(): Promise<ApiResponse<Task[]>> {
-    const data = await this.taskService.getTaskCount();
-    return apiResponse(data, 'success', 200);
-  }
 }

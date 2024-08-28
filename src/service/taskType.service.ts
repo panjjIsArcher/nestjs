@@ -9,4 +9,12 @@ export class TaskTypeService {
     @InjectRepository(TaskType)
     private taskTypeRepository: TaskTypeRepository,
   ) {}
+
+  async find(): Promise<TaskType[]> {
+    return await this.taskTypeRepository.find();
+  }
+
+  async countById(id: number) {
+    return await this.taskTypeRepository.count({ where: { id } });
+  }
 }
