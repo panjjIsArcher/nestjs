@@ -7,7 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import setting from '../ormconfig';
 import modules from './module/index';
 import { AuthMiddleware } from './middleware/auth.middleware';
-import Controllers from './controller/index';
+
 @Module({
   providers: Object.values(service),
   imports: [
@@ -20,12 +20,7 @@ import Controllers from './controller/index';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    const excludeControllers = [
-      controller.AppController,
-      controller.GeoController,
-      controller.TaskController,
-      controller.TaskTypeController,
-    ];
-    consumer.apply(AuthMiddleware).forRoutes(...excludeControllers);
+    const includeControllers = [controller.UserController];
+    consumer.apply(AuthMiddleware).forRoutes(...includeControllers);
   }
 }
