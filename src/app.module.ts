@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import controller from './controller';
 import service from './service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -6,6 +6,8 @@ import entity from './entity/index';
 import { ConfigModule } from '@nestjs/config';
 import setting from '../ormconfig';
 import modules from './module/index';
+import { AuthMiddleware } from './middleware/auth.middleware';
+import Controllers from './controller/index';
 @Module({
   providers: Object.values(service),
   imports: [
@@ -16,4 +18,14 @@ import modules from './module/index';
   ],
   controllers: Object.values(controller),
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    const excludeControllers = [
+      controller.AppController,
+      controller.GeoController,
+      controller.TaskController,
+      controller.TaskTypeController,
+    ];
+    consumer.apply(AuthMiddleware).forRoutes(...excludeControllers);
+  }
+}
