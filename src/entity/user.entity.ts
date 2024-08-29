@@ -7,18 +7,27 @@ import {
   BeforeInsert,
 } from 'typeorm';
 import { format } from 'date-fns';
+import { ApiProperty } from '@nestjs/swagger';
 @Entity()
 export class User {
   @Column()
+  @ApiProperty()
   name: string;
 
   @PrimaryGeneratedColumn()
+  @ApiProperty()
   id: number;
 
+  @ApiProperty()
+  @Column()
+  password: string;
+
   @CreateDateColumn({ type: 'datetime' })
+  @ApiProperty()
   createdAt: Date;
 
   @UpdateDateColumn({ type: 'datetime' })
+  @ApiProperty()
   updatedAt: Date;
 
   @BeforeInsert()

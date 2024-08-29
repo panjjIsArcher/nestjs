@@ -20,4 +20,16 @@ export class UserService {
   async findOne(id: number) {
     return this.userRepository.findOne({ where: { id } });
   }
+
+  async findByName(name: string) {
+    return this.userRepository.findOne({ where: { name } });
+  }
+
+  async login(User) {
+    // 先匹配
+    const user = await this.findByName(User.name);
+    if (user) {
+      return false;
+    }
+  }
 }
