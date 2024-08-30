@@ -36,6 +36,7 @@ export class UserService {
     if (user.password !== User.password) {
       return false;
     }
+    // 生成token
     return true;
   }
 }
