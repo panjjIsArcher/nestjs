@@ -45,7 +45,12 @@ export class UserController {
         throw new HttpException('密码不为空', HttpStatus.BAD_GATEWAY);
       }
 
-      return await this.useService.login({ name, password });
+      const data = await this.useService.login({ name, password });
+      if (!data) {
+        throw new HttpException('账号有误', HttpStatus.OK);
+      }
+
+      return apiResponse(true, '登陆成功', HttpStatus.OK);
     } catch (err) {
       throw new CustomExceptionFilter();
     }

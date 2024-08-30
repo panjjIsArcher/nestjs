@@ -25,11 +25,17 @@ export class UserService {
     return this.userRepository.findOne({ where: { name } });
   }
 
-  async login(User) {
+  async login(User): Promise<boolean> {
     // 先匹配
     const user = await this.findByName(User.name);
-    if (user) {
+    // 没有注册
+    if (!user) {
       return false;
     }
+    // 比对密码
+    if (user.password !== User.password) {
+      return false;
+    }
+    return true;
   }
 }

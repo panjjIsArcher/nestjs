@@ -10,7 +10,7 @@ import { format } from 'date-fns';
 import { ApiProperty } from '@nestjs/swagger';
 @Entity()
 export class User {
-  @Column()
+  @Column({ unique: true })
   @ApiProperty()
   name: string;
 
